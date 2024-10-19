@@ -3,6 +3,7 @@ import { Add } from '@mui/icons-material'
 
 import Rule from './Rule'
 import { useGetDiceQuery } from '../store/diceSlice'
+import { useGetLightsQuery } from '../store/hueSlice'
 
 const MainStack = styled(Stack)({
   gap: '8px',
@@ -24,7 +25,8 @@ const AddStack = styled(IconButton)({
 
 const Main = () => {
   const { data: diceSettings, isLoading } = useGetDiceQuery()
-
+  const { data: lights, isLightsLoading } = useGetLightsQuery()
+  console.log(lights)
   if (isLoading) {
     return (
       <MainStack sx={{ justifyContent: 'center' }}>
@@ -38,7 +40,7 @@ const Main = () => {
       {diceSettings.rules.map((rule, idx) => {
         return <Rule key={idx} {...rule} />
       })}
-      <AddStack >
+      <AddStack>
         <Add />
       </AddStack>
     </MainStack>
